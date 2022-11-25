@@ -1,4 +1,3 @@
-import { fromJSON } from 'postcss';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,7 +9,7 @@ const Register = () => {
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const handleSignUp = (data) => {
-        console.log(data)
+       
         setSignUPError('');
         createUser(data.email, data.password)
             .then(result => {
@@ -22,7 +21,7 @@ const Register = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        // saveUser(data.name, data.email);
+                        userSave(data.name, data.email, data.role);
                     })
                     .catch(err => console.log(err));
             
@@ -31,6 +30,22 @@ const Register = () => {
                 console.log(error)
                 setSignUPError(error.message)
             });
+    }
+
+    const userSave = (name, email, role) =>{
+        const user = {name, email, role}
+        fetch('http://localhost:5000/users',{
+            method:'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        
     }
     return (
         <div>
@@ -68,9 +83,9 @@ const Register = () => {
                                     {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                                 </div>
                                 <div className="form-control w-full max-w-xs">
-                                    <label className="label"> <span className="label-text">Type</span></label>
+                                    <label className="label"> <span className="label-text">Role</span></label>
                                     <select
-                                        {...register('type')}
+                                        {...register('role')}
                                         className="select input-bordered w-full max-w-xs">
                                          <option>Seller</option>
                                          <option>Buyer</option>
