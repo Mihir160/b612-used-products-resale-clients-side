@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import { fromJSON } from 'postcss';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider';
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const handleSignUp = (data) => {
+        console.log(data)
         setSignUPError('');
-        // createUser(data.email, data.password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user);
-        //         toast('User Created Successfully.')
-        //         const userInfo = {
-        //             displayName: data.name
-        //         }
-        //         updateUser(userInfo)
-        //             .then(() => {
-        //                 saveUser(data.name, data.email);
-        //             })
-        //             .catch(err => console.log(err));
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //         setSignUPError(error.message)
-        //     });
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast('User Created Successfully.')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        // saveUser(data.name, data.email);
+                    })
+                    .catch(err => console.log(err));
+            
+            })
+            .catch(error => {
+                console.log(error)
+                setSignUPError(error.message)
+            });
     }
     return (
         <div>
@@ -62,21 +68,17 @@ const Register = () => {
                                     {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                                 </div>
                                 <div className="form-control w-full max-w-xs">
-                                    <label className="label"> <span className="label-text">Seller/Buyer</span></label>
+                                    <label className="label"> <span className="label-text">Type</span></label>
                                     <select
-                                        {...register('seller/Buyer')}
+                                        {...register('type')}
                                         className="select input-bordered w-full max-w-xs">
-                                        
                                          <option>Seller</option>
                                          <option>Buyer</option>
-                                        
-
-
                                     </select>
                                 </div>
                                 <input className='btn btn-outline w-full mt-6' value="Sign Up" type="submit" />
                                 <div>
-                                    {/* {loginError && <p className='text-red-600'>{loginError}</p>} */}
+                                    {signUpError && <p className='text-red-600'>{signUpError}</p>}
                                 </div>
                             </form>
                             <p>You have  Account? <Link className='text-white underline' to="/login">Please Login</Link></p>

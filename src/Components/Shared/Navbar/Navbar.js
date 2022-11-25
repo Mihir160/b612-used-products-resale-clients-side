@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../../image/logo2.png'
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
-   
-
+    const {user, logOut} = useContext(AuthContext)
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err));
+    }
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Blog</Link></li>
@@ -33,7 +38,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login'>Login</Link>
+                
+                {
+                  user?.uid ? <Link onClick={handleLogOut}>Log out</Link>: <Link to='/login'>Login</Link>
+                }
             </div>
         </div>
     );
