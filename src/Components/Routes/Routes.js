@@ -5,6 +5,7 @@ import Home from "../Home/Home";
 import Main from "../Layout/Main";
 import Login from "../Login/Login";
 import Products from "../Products/Products";
+import Register from "../Register/Register";
 import ErrorDisplay from "../Shared/ErrorDisplay/ErrorDisplay";
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login></Login>
+            },
+            {
+                path:'/register',
+                element:<Register></Register>
             }
            
         ]

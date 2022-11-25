@@ -65,7 +65,7 @@ const Login = () => {
                                     {loginError && <p className='text-red-600'>{loginError}</p>}
                                 </div>
                             </form>
-                            <p>You have no Account? <Link className='text-white underline' to="/signup">Please Create new Account</Link></p>
+                            <p>You have no Account? <Link className='text-white underline' to="/register">Please Create new Account</Link></p>
                             <div className="divider">OR</div>
                             <button className='btn btn-outline w-full'><FaGoogle className='m-2'></FaGoogle> GOOGLE</button>
                         </div>
