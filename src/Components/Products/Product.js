@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
-const Product = ({ product }) => {
-    console.log(product)
-    const { image, title, location, original_price, resale_price, years_of_use, seller_name, seller_verified, post_time, product_condition
+import { AuthContext } from '../contexts/AuthProvider';
+import BookingModal from './BookingModal';
+const Product = ({ product, setBooking }) => {
+     const {user} = useContext(AuthContext)
+    // console.log(product)
+    const { image, title, location, original_price, resale_price, years_of_use, 
+        seller_name, seller_verified, post_time, product_condition
     } = product
     return (
         <div>
@@ -27,7 +31,9 @@ const Product = ({ product }) => {
 
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Book Now</button>
+                    <label onClick={()=> setBooking(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
+                     
+                        
                     </div>
                 </div>
             </div>

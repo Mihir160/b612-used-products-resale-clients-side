@@ -26,7 +26,7 @@ const Login = () => {
           const role = 'Buyer'
           userSave(user.displayName, user.email, role)
          
-        //   navigate(from, {replace: true})
+          navigate(from, {replace: true})
         })
         .catch(error => console.error(error))
     }
@@ -41,6 +41,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setLoginUserEmail(data.email);
+                navigate(from, {replace: true})
             })
             .catch(error => {
                 console.log(error.message)

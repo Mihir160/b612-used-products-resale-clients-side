@@ -2,7 +2,7 @@ import React from 'react';
 import {useQuery} from '@tanstack/react-query'
 import Category from './Category';
 const Categories = () => {
-    const {data: categories=[] } = useQuery ({
+    const {data: categories=[], refetch } = useQuery ({
         queryKey:['categories'],
         queryFn: async () =>{
             const res = await fetch('http://localhost:5000/categories')

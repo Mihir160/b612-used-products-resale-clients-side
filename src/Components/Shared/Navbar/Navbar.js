@@ -4,7 +4,7 @@ import img from '../../../image/logo2.png'
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -14,7 +14,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/appointment">Blog</Link></li>
         <li><Link to="/about">About</Link></li>
-     
+
     </React.Fragment>
 
     return (
@@ -38,9 +38,14 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                
+
                 {
-                  user?.uid ? <Link onClick={handleLogOut}>Log out</Link>: <Link to='/login'>Login</Link>
+                    user?.uid ?
+                        <>
+                            <Link className='mx-4' to="/dashboard">Dashboard</Link>
+                            <Link className='' onClick={handleLogOut}>Log out</Link>
+                        </>
+                        : <Link to='/login'>Login</Link>
                 }
             </div>
         </div>

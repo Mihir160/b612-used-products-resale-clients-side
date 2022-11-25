@@ -16,6 +16,7 @@ const Register = () => {
                 const user = result.user;
                 console.log(user);
                 toast('User Created Successfully.')
+                
                 const userInfo = {
                     displayName: data.name
                 }
