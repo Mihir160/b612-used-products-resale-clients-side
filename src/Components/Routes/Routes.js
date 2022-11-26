@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Blog/Blog";
+import AllSellers from "../Dashboard/AllSellers/AllSellers";
+import AllBuyers from "../Dashboard/AllBuyers/AllBuyers";
 import Myorders from "../Dashboard/MyOrders/Myorders";
 
 
@@ -11,6 +13,11 @@ import Products from "../Products/Products";
 import Register from "../Register/Register";
 import ErrorDisplay from "../Shared/ErrorDisplay/ErrorDisplay";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
+import SellerRoute from "./SellerRoute";
+import AddProduct from "../Dashboard/AddProduct/AddProduct";
+import MyProducts from "../Dashboard/MyProducts/MyProducts";
 
 const router = createBrowserRouter([
     {
@@ -49,8 +56,24 @@ const router = createBrowserRouter([
       errorElement:<ErrorDisplay></ErrorDisplay>,
       children:[
           {
-              path:'/dashboard',
-              element:<Myorders></Myorders>
+              path:'/dashboard/myorders',
+              element:<BuyerRoute><Myorders></Myorders></BuyerRoute>
+          },
+          {
+            path:'/dashboard/sellers',
+            element:<AdminRoute><AllSellers></AllSellers></AdminRoute>
+          },
+          {
+            path:'/dashboard/buyers',
+            element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+          },
+          {
+            path:'/dashboard/addproduct',
+            element:<SellerRoute><AddProduct></AddProduct></SellerRoute>
+          },
+          {
+            path:'/dashboard/myproducts',
+            element:<SellerRoute><MyProducts></MyProducts></SellerRoute>
           }
       ]
     }
