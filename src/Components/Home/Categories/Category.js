@@ -10,7 +10,7 @@ const Category = ({ category }) => {
                 <figure><img src={image} alt="phone" /></figure>
                 <div className="card-body">
                     <div className="card-actions  justify-center mt-12">
-                       <Link  to={`/products/${category_id}`}> <button className="btn btn-primary btn-outline">{category_name}</button></Link>
+                       <Link  to={`/products/${category_name}`}> <button className="btn btn-primary btn-outline">{category_name}</button></Link>
                     </div>
                 </div>
             </div>
