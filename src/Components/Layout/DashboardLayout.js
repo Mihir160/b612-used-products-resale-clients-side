@@ -11,10 +11,10 @@ const DashboardLayout = () => {
                 <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side bg-base-100 shadow-2xl shadow-white">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content">
-                        <li><Link to="/dashboard">My Orders</Link></li>
+                    <ul className="menu p-4 w-80   text-base-content">
+                        <li className='bg-orange-700 rounded-xl'><Link to="/dashboard">My Orders</Link></li>
 
 
                     </ul>

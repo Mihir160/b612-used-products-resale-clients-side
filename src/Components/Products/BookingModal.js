@@ -4,9 +4,8 @@ import { AuthContext } from '../contexts/AuthProvider';
 
 const BookingModal = ({booking}) => {
     const {user} = useContext(AuthContext)
-    const {title, resale_price} = booking
-    console.log(user)
-    console.log(booking)
+    const {title, resale_price,_id} = booking
+   
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,14 +15,17 @@ const BookingModal = ({booking}) => {
         const resalePrice = form.resalePrice.value
         const phone = form.phone.value
         const location = form.location.value
-        console.log(name, email, itemName, resalePrice, phone, location)
+        const bokingId = _id
+        
         const booking = {
             userName: name,
             email,
             itemName,
             resalePrice,
             phone,
-            location
+            location,
+            bokingId
+           
         }
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -59,12 +61,12 @@ const BookingModal = ({booking}) => {
                 <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                 <form onSubmit={handleBooking}  className='grid grid-cols-1 gap-3 mt-10'>
                  
-                    <input name="name" type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input w-full input-bordered" />
-                    <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full input-bordered" />
-                    <input name="itemName" type="text" defaultValue={title} disabled placeholder="Item name" className="input w-full input-bordered" />
-                    <input name="resalePrice" type="text" defaultValue= {resale_price} disabled placeholder="Resale price" className="input w-full input-bordered" />
-                    <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" />
-                    <input name="location" type="text" placeholder="Meeting Location"  className="input w-full input-bordered" />
+                    <input name="name" type="text" defaultValue={user?.displayName} disabled placeholder="Your Name" className="input w-full input-bordered shadow-sm shadow-white" />
+                    <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-full shadow-sm shadow-white input-bordered" />
+                    <input name="itemName" type="text" defaultValue={title} disabled placeholder="Item name" className="input w-full input-bordered shadow-sm shadow-white" />
+                    <input name="resalePrice" type="text" defaultValue= {resale_price} disabled placeholder="Resale price" className="input w-full input-bordered shadow-sm shadow-white" />
+                    <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered shadow-sm shadow-white" />
+                    <input name="location" type="text" placeholder="Meeting Location"  className="input w-full input-bordered shadow-sm shadow-white" />
                     <br />
                     <input className='btn bg-orange-800 text-white w-full' type="submit" value="Submit" />
                 </form>
