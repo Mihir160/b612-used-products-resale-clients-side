@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from './BookingModal';
 import Product from './Product';
 
 const Products = () => {
-  
+ 
 
     const products = useLoaderData()
     const [booking, setBooking] = useState([])
-    // console.log(booking)
- 
+   
+
     return (
         <div>
 

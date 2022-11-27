@@ -21,7 +21,7 @@ const Myorders = () => {
         }
     })
 
-    console.log(bookings)
+    // console.log(bookings)
 
 
 
@@ -48,9 +48,17 @@ const Myorders = () => {
                                 <td>{booking.itemName}</td>
                                 <td>{booking.resalePrice}</td>
                                 <td>
-                                    <button
+
+                                    {
+                                        booking.resalePrice && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}><button
                                         className='btn btn-outline  btn-sm'
-                                    >Pay</button>
+                                    >Pay</button></Link>
+                                    }
+
+                                    {
+                                        booking.resalePrice && booking.paid && <span className='text-primary'>paid</span>
+                                    }
+                                    
 
                                     {/* {
                                         booking.price && !booking.paid && <Link

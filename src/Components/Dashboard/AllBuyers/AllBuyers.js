@@ -16,7 +16,6 @@ const AllBuyers = () => {
         }
     })
     const sellerDelete = seller =>{
-        console.log(seller)
         fetch(`http://localhost:5000/users/${seller._id}`,{
             method: 'DELETE',
             headers:{
@@ -25,7 +24,6 @@ const AllBuyers = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             if(data.deletedCount > 0){
                 refetch()
                 toast.success('deleted buyers')

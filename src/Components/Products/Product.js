@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
-import { AuthContext } from '../contexts/AuthProvider';
-import BookingModal from './BookingModal';
-const Product = ({ product, setBooking }) => {
-     const {user} = useContext(AuthContext)
-    // console.log(product)
+
+
+const Product = ({ product, setBooking}) => {
+  
+
     const { image, title, location, original_price, resale_price, years_of_purchase, 
-        seller_name, seller_verified, post_time, product_condition, description} = product
+        seller_name,  post_time, product_condition, description} = product
     return (
         <div>
             <div className="card lg:w-96 lg:h-full bg-base-100 shadow-2xl shadow-white">
@@ -22,12 +22,15 @@ const Product = ({ product, setBooking }) => {
                     <p>Resale Price : ${resale_price}</p>
                     <p>years_of_purchase : {years_of_purchase}</p>
                     <p>Condition : {product_condition}</p>
-                    <p>Post Date : {post_time}</p>
+                    <p>Post Date/Time : {post_time}</p>
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
-                        {
-                            seller_verified === 'verified' && <p className='text-green-700'><FaUserCheck></FaUserCheck></p>
-                        }
+                        
+                        {/* {
+                          
+                          seller_verified === 'verified' &&<p className='text-green-700'><FaUserCheck></FaUserCheck></p>    
+                          
+                        } */}
 
                     </div>
                     <div className="card-actions justify-end">

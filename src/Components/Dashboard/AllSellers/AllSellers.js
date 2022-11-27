@@ -19,7 +19,6 @@ const AllSellers = () => {
     })
   
     const sellerDelete = seller =>{
-        console.log(seller)
         fetch(`http://localhost:5000/users/${seller._id}`,{
             method: 'DELETE',
             headers:{
@@ -37,6 +36,20 @@ const AllSellers = () => {
         })
         
     }
+
+    const handleVerified = id =>{
+        fetch(`http://localhost:5000/users/seller/${id}`,{
+            method: 'PUT',
+
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                refetch()
+                toast.success('successfully make verified')
+            }
+        })
+    }
     return (
         <div>
             
@@ -49,6 +62,7 @@ const AllSellers = () => {
                                 <th></th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Verified</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -58,7 +72,15 @@ const AllSellers = () => {
                                     <th>{i + 1}</th>
                                     <td>{userSeller.name}</td>
                                     <td>{userSeller.email}</td>
-                                    <td><button onClick={() => sellerDelete(userSeller)} className='btn btn-xs btn-danger'>Delete</button></td>
+                                    <td>{ userSeller?.seller_verified !== 'verified' && 
+                                    <button onClick={() => handleVerified(userSeller._id)} className='btn btn-xs bg-green-600'>Make Verified</button>
+                                    
+                                    }
+                                    {
+                                      userSeller?.seller_verified === 'verified' && 
+                                      <button onClick={() => handleVerified(userSeller._id)} className='btn btn-xs bg-green-600'>Verified</button>
+                                    }</td>
+                                    <td><button onClick={() => sellerDelete(userSeller)} className='btn btn-xs bg-red-600'>Delete</button></td>
                                 </tr>)
                             }
 
