@@ -5,7 +5,7 @@ import BookingModal from './BookingModal';
 const Product = ({ product, setBooking }) => {
      const {user} = useContext(AuthContext)
     // console.log(product)
-    const { image, title, location, original_price, resale_price, years_of_use, 
+    const { image, title, location, original_price, resale_price, years_of_purchase, 
         seller_name, seller_verified, post_time, product_condition, description} = product
     return (
         <div>
@@ -20,9 +20,9 @@ const Product = ({ product, setBooking }) => {
                     <p>Description : {description}</p>
                     <p>Original Price : ${original_price}</p>
                     <p>Resale Price : ${resale_price}</p>
-                    {/* <p>Years of use : {years_of_use}</p> */}
+                    <p>years_of_purchase : {years_of_purchase}</p>
                     <p>Condition : {product_condition}</p>
-                    <p>Post Time : {post_time}</p>
+                    <p>Post Date : {post_time}</p>
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
                         {

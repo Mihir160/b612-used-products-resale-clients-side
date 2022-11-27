@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext)
     const imageKey = process.env.REACT_APP_imgbb_Key
-    console.log(imageKey)
+    const navigate = useNavigate()
     const [selectedDate, setSelectedDate] = useState(new Date())
     const { data: categoryname, isLoading } = useQuery({
         queryKey: ['categoryname'],
@@ -21,9 +23,7 @@ const AddProduct = () => {
         }
     })
     const productAdd = data => {
-        console.log(data)
         const image = data.image[0];
-        console.log(image)
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageKey}`
@@ -33,7 +33,39 @@ const AddProduct = () => {
         })
         .then(res => res.json())
         .then(imgData => {
-           console.log(imgData)
+           if(imgData.success){
+            const product = {
+                category_name: data.category_name,
+                image: imgData.data.url,
+                title: data.title,
+                location: data.location,
+                resale_price: data.resale_price,
+                original_price: data.original_price,
+                years_of_purchase: data.years_of_purchase,
+                product_condition: data.product_condition,
+                post_time:data.post_time,
+                seller_name: data.seller_name,
+                seller_verified: data.seller_verified,
+                seller_phone: data.seller_phone,
+                seller_email: data.seller_email,
+                description: data.description
+            }
+
+            fetch('http://localhost:5000/products', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json', 
+                   
+                },
+                body: JSON.stringify(product)
+            })
+            .then(res => res.json())
+            .then(result =>{
+                console.log(result);
+                toast.success(`${data.title} is added successfully`);
+                navigate('/dashboard/myproducts')
+            })
+           }
         })
     }
     if (isLoading) {
@@ -114,6 +146,16 @@ const AddProduct = () => {
                                             className="input input-bordered w-full max-w-xs" />
 
                                         {errors.product_condition && <p className='text-red-600'>{errors.product_condition?.message}</p>}
+                                    </div>
+                                    <div className="form-control w-full max-w-xs">
+                                        <label className="label"> <span className="label-text">years_of_purchase</span></label>
+                                        <input type="text"
+                                            {...register("years_of_purchase", {
+                                                required: "years_of_purchase is required",
+                                            })}
+                                            className="input input-bordered w-full max-w-xs" />
+
+                                        {errors.years_of_purchase && <p className='text-red-600'>{errors.years_of_purchase?.message}</p>}
                                     </div>
                                     <div className="form-control w-full max-w-xs">
                                         <label className="label"> <span className="label-text">Post_Date</span></label>
