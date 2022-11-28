@@ -5,6 +5,8 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext)
+
+    
     const {data : myProducts, refetch} = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
@@ -18,6 +20,8 @@ const MyProducts = () => {
            }
         }
     })
+
+    console.log(myProducts)
 
     const deleteMyProduct = myproduct =>{
      
