@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -10,7 +11,7 @@ const CheckoutForm = ({ booking }) => {
     const [processing, setProcessing] = useState(false);
     const stripe = useStripe()
     const elements = useElements();
-    const { resalePrice, userName, email, _id } = booking
+    const { resalePrice, userName, email, _id, bookingId } = booking
   
 
 
@@ -27,6 +28,8 @@ const CheckoutForm = ({ booking }) => {
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
     }, [resalePrice]);
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -101,6 +104,22 @@ const CheckoutForm = ({ booking }) => {
                     if (data.insertedId) {
                         setSuccess('Congrats! your payment completed');
                         setTransactionId(paymentIntent.id);
+
+                        fetch(`http://localhost:5000/productsdelete/${bookingId}`,{
+                            method: 'DELETE',
+                            headers:{
+                                // 'content-type': 'application/json', 
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if(data.deletedCount > 0){
+                              
+                                // toast.success('deleted')
+                            }
+                   
+                        })
                     }
                 })
            

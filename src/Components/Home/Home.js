@@ -7,6 +7,7 @@ const Home = () => {
         <div>
             <Header></Header>
             <Categories></Categories>
+            
         </div>
     );
 };

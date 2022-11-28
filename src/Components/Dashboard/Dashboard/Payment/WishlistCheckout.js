@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const WishlistCheckout = ({ wishlist }) => {
 
@@ -10,7 +11,7 @@ const WishlistCheckout = ({ wishlist }) => {
     const [processing, setProcessing] = useState(false);
     const stripe = useStripe()
     const elements = useElements();
-    const { resalePrice, userName, email, _id } = wishlist
+    const { resalePrice, userName, email, _id, bookingId } = wishlist
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
         fetch("http://localhost:5000/create-payment-intent", {
@@ -83,7 +84,7 @@ const WishlistCheckout = ({ wishlist }) => {
                 bookingId: _id
             }
 
-            fetch('http://localhost:5000/payments', {
+            fetch('http://localhost:5000/wishlistpayments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -98,6 +99,22 @@ const WishlistCheckout = ({ wishlist }) => {
                     if (data.insertedId) {
                         setSuccess('Congrats! your payment completed');
                         setTransactionId(paymentIntent.id);
+
+                        fetch(`http://localhost:5000/productsdelete/${bookingId}`,{
+                            method: 'DELETE',
+                            headers:{
+                                // 'content-type': 'application/json', 
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if(data.deletedCount > 0){
+                              
+                                // toast.success('deleted')
+                            }
+                   
+                        })
                     }
                 })
 
