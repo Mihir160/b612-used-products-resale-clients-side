@@ -25,3 +25,7 @@ Live Link:
 
 ## Technology ,Frameworks, libraries used
 * Html,Css,Javascript,Reactjs, tailwind, daisyui, useQuery, axios, react-icon, firebase,vercel, 
+
+## Admin
+* useremail: mihir.roy@gmail.com
+* password: 123456
