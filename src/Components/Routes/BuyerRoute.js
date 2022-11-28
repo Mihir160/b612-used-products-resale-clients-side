@@ -13,7 +13,6 @@ const BuyerRoute = ({ children }) => {
         return <progress className="progress bg-orange-500 w-56"></progress>
     }
  
-     
     if (user && !isBuyer) {
         return children;
     }
