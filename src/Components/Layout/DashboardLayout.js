@@ -28,6 +28,7 @@ const DashboardLayout = () => {
                         {
                             isBuyer && <>
                                 <li className='bg-orange-700 rounded-xl'><Link to="/dashboard/myorders">My Orders</Link></li>
+                                <li className='bg-orange-700 rounded-xl'><Link to="/dashboard/mywishlist">My WishList</Link></li>
                             </>
                         }
 

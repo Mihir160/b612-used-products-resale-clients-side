@@ -2,12 +2,12 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import CheckoutForm from './CheckoutForm';
+import WishlistCheckout from './WishlistCheckout';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK)
-// console.log(stripePromise)
-const Payment = () => {
-    const booking = useLoaderData()
-    const { itemName, resalePrice } = booking
+const WishlistPayment = () => {
+
+    const wishlist = useLoaderData()
+    const {itemName,resalePrice } =  wishlist
     return (
         <div>
             <div className="card w-96 lg:m-48 bg-base-100 shadow-xl shadow-white">
@@ -16,7 +16,7 @@ const Payment = () => {
                     <p>Please pay your amount $ {resalePrice}</p>
                     <div>
                         <Elements stripe={stripePromise}>
-                            <CheckoutForm booking={booking} />
+                            <WishlistCheckout wishlist={wishlist} />
                         </Elements>
                     </div>
                 </div>
@@ -25,4 +25,4 @@ const Payment = () => {
     );
 };
 
-export default Payment;
+export default WishlistPayment;

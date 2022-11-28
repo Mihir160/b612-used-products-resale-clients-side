@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
+import { AuthContext } from '../contexts/AuthProvider';
 
 
 
 const Product = ({ product, setBooking}) => {
      
-  
+     const {user} = useContext(AuthContext)
     const { image, title, location, original_price, resale_price, years_of_purchase, 
         seller_name,  post_time, product_condition, description, seller_email } = product
       
@@ -22,6 +24,43 @@ const Product = ({ product, setBooking}) => {
     //         }
     //     })
     // console.log(verify?.seller_verified)
+   
+    const wishlistHandle = wishlist =>{
+            console.log(wishlist)
+            console.log(wishlist.category_name)
+            const wishlistadd = {
+                userName: wishlist.seller_name,
+                email : user.email,
+                seller_email: wishlist.seller_email,
+                itemName : wishlist.title,
+                resalePrice: wishlist.resale_price,
+                phone : wishlist.seller_phone,
+                location : wishlist.location,
+                bookingId : wishlist._id,
+                image : wishlist.image
+            }
+            // console.log(wishlistadd)
+
+            fetch('http://localhost:5000/wishlist', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishlistadd)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                  
+                    toast.success('Wishlist confirmed');
+                }
+                else{
+                    toast.error(data.message);
+                }
+            })
+    }
+
     return (
         <div>
             <div className="card lg:w-96 lg:h-full bg-base-100 shadow-2xl shadow-white">
@@ -51,6 +90,8 @@ const Product = ({ product, setBooking}) => {
 
                     </div>
                     <div className="card-actions justify-end">
+                    <label onClick={()=> wishlistHandle(product)}  
+                    className="btn btn-primary">Wishlist</label>
                     <label onClick={()=> setBooking(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
                      
                         

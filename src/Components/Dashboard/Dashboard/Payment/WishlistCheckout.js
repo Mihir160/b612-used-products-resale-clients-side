@@ -1,8 +1,8 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-
 import React, { useEffect, useState } from 'react';
 
-const CheckoutForm = ({ booking }) => {
+const WishlistCheckout = ({ wishlist }) => {
+
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -10,10 +10,7 @@ const CheckoutForm = ({ booking }) => {
     const [processing, setProcessing] = useState(false);
     const stripe = useStripe()
     const elements = useElements();
-    const { resalePrice, userName, email, _id } = booking
-  
-
-
+    const { resalePrice, userName, email, _id } = wishlist
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
         fetch("http://localhost:5000/create-payment-intent", {
@@ -73,12 +70,12 @@ const CheckoutForm = ({ booking }) => {
             setCardError('');
         }
 
-        
+
         if (paymentIntent.status === "succeeded") {
             console.log('card info', card);
             // setSuccess('Congrats! your payment completed');
             // setTransactionId(paymentIntent.id);
-            
+
             const payment = {
                 resalePrice,
                 transactionId: paymentIntent.id,
@@ -95,7 +92,7 @@ const CheckoutForm = ({ booking }) => {
                 body: JSON.stringify(payment)
             })
 
-            .then(res => res.json())
+                .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
@@ -103,7 +100,7 @@ const CheckoutForm = ({ booking }) => {
                         setTransactionId(paymentIntent.id);
                     }
                 })
-           
+
         }
         setProcessing(false);
     }
@@ -141,4 +138,4 @@ const CheckoutForm = ({ booking }) => {
     );
 };
 
-export default CheckoutForm;
+export default WishlistCheckout;
