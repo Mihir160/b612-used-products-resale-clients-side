@@ -9,7 +9,7 @@ const MyProducts = () => {
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
            try{
-            const res = await fetch(`http://localhost:5000/product?email=${user?.email}`)
+            const res = await fetch(`http://localhost:5000/product?email=${user?.email}`,)
             const data = await res.json();
             return data; 
            }
