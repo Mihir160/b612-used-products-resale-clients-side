@@ -41,7 +41,7 @@ const AllSellers = () => {
     }
 
     const handleVerified = email =>{
-        // console.log(email)
+       
         fetch(`http://localhost:5000/users/seller/${email}`,{
             method: 'PUT',
             headers: {

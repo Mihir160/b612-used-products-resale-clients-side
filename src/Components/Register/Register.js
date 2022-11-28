@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import useToken from '../Hooks/useToken';
 const Register = () => {
@@ -11,18 +11,18 @@ const Register = () => {
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const [token] = useToken(createdUserEmail)
     const navigate = useNavigate();
-    if(token){
+    if (token) {
         navigate('/')
     }
     const handleSignUp = (data) => {
-       
+
         setSignUPError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 toast('User Created Successfully.')
-                
+
                 const userInfo = {
                     displayName: data.name
                 }
@@ -31,7 +31,7 @@ const Register = () => {
                         userSave(data.name, data.email, data.role);
                     })
                     .catch(err => console.log(err));
-            
+
             })
             .catch(error => {
                 console.log(error)
@@ -39,25 +39,24 @@ const Register = () => {
             });
     }
 
-    const userSave = (name, email, role) =>{
-        const user = {name, email, role}
-        fetch('http://localhost:5000/users',{
-            method:'POST',
-            headers:{
+    const userSave = (name, email, role) => {
+        const user = { name, email, role }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data => {
-            // console.log(data)
-            setCreatedUserEmail(email)
-       
-        })
-        
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email)
+
+            })
+
     }
 
-   
+
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
@@ -98,8 +97,8 @@ const Register = () => {
                                     <select
                                         {...register('role')}
                                         className="select input-bordered w-full max-w-xs">
-                                         <option>Seller</option>
-                                         <option>Buyer</option>
+                                        <option>Seller</option>
+                                        <option>Buyer</option>
                                     </select>
                                 </div>
                                 <input className='btn btn-outline w-full mt-6' value="Sign Up" type="submit" />

@@ -2,7 +2,7 @@ import React from 'react';
 import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
 const AdvertiseCard = ({advertisedItem}) => {
     const { image, title, location, original_price, resale_price, years_of_purchase, 
-        seller_name,  post_time, product_condition, description, seller_email, years_of_use } = advertisedItem
+        seller_name,  post_time, product_condition, description, seller_state , years_of_use } = advertisedItem
     return (
         <div>
                <div className="card lg:w-96 lg:h-full bg-base-100 shadow-2xl shadow-white">
@@ -22,14 +22,9 @@ const AdvertiseCard = ({advertisedItem}) => {
                     <p>Post Date/Time : {post_time}</p>
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
-{/*                         
                         {
-                        
-
-                          
-                        verify?.seller_verified ==='verified'  && <p className='text-green-700'><FaUserCheck></FaUserCheck></p>    
-                
-                        } */}
+                        seller_state && <p className='text-green-600'><FaUserCheck></FaUserCheck></p>  
+                        }
 
                     </div>
                     
