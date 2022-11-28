@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
+import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { AuthContext } from '../contexts/AuthProvider';
 
 
@@ -71,7 +71,7 @@ const Product = ({ product, setBooking }) => {
                         <p>Seller : {seller_name}</p>
 
                         {
-                            seller_state && <p className='text-green-600'><FaUserCheck></FaUserCheck></p>
+                            seller_state && <p className='text-green-600'><FaCheckCircle></FaCheckCircle></p>
                         }
 
                     </div>

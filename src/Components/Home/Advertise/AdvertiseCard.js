@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
+import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 const AdvertiseCard = ({advertisedItem}) => {
     const { image, title, location, original_price, resale_price, years_of_purchase, 
         seller_name,  post_time, product_condition, description, seller_state , years_of_use } = advertisedItem
@@ -23,7 +23,7 @@ const AdvertiseCard = ({advertisedItem}) => {
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
                         {
-                        seller_state && <p className='text-green-600'><FaUserCheck></FaUserCheck></p>  
+                        seller_state && <p className='text-green-600'><FaCheckCircle></FaCheckCircle></p>  
                         }
 
                     </div>
