@@ -12,9 +12,9 @@ const Myorders = () => {
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
-                // headers: {
-                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                // }
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             });
             const data = await res.json();
             return data;
@@ -60,18 +60,7 @@ const Myorders = () => {
                                     }
                                     
 
-                                    {/* {
-                                        booking.price && !booking.paid && <Link
-                                            to={`/dashboard/payment/${booking._id}`}
-                                        >
-                                            <button
-                                                className='btn bg-orange-700 btn-primary btn-sm'
-                                            >Pay</button>
-                                        </Link>
-                                    }
-                                    {
-                                        booking.price && booking.paid && <span className='text-green-500'>Paid</span>
-                                    } */}
+                            
                                 </td>
                             </tr>)
                         }

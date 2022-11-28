@@ -40,6 +40,9 @@ const AllSellers = () => {
     const handleVerified = id =>{
         fetch(`http://localhost:5000/users/seller/${id}`,{
             method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
 
         })
         .then(res => res.json())

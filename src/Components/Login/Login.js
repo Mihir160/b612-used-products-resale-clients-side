@@ -4,36 +4,40 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../Hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { user, signIn , providerLogin} = useContext(AuthContext);
+    const { user, signIn, providerLogin } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
-    // const [token] = useToken(loginUserEmail);
+    const [token] = useToken(loginUserEmail);
     const location = useLocation();
     const navigate = useNavigate();
     const googlProvider = new GoogleAuthProvider()
 
     const from = location.state?.from?.pathname || '/';
     // console.log(user)
-    
-    const handleGoogleSignIn = user =>{
+
+    const handleGoogleSignIn = user => {
         providerLogin(googlProvider)
-       
-        .then(result =>{
-          const user = result.user
-          const role = 'Buyer'
-          userSave(user.displayName, user.email, role)
-         
-          navigate(from, {replace: true})
-        })
-        .catch(error => console.error(error))
+
+            .then(result => {
+                const user = result.user
+                const role = 'Buyer'
+                userSave(user.displayName, user.email, role)
+
+                //   navigate(from, {replace: true})
+                
+                setLoginUserEmail(user.email)
+              
+            })
+            .catch(error => console.error(error))
     }
 
-    // if (token) {
-    //     navigate(from, { replace: true });
-    // }
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const handleLogin = data => {
         setLoginError('');
@@ -41,7 +45,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setLoginUserEmail(data.email);
-                navigate(from, {replace: true})
+
             })
             .catch(error => {
                 console.log(error.message)
@@ -49,20 +53,20 @@ const Login = () => {
             });
     }
 
-    const userSave = (name, email, role) =>{
-        const user = {name, email, role}
-        fetch('http://localhost:5000/users',{
-            method:'POST',
-            headers:{
+    const userSave = (name, email, role) => {
+        const user = { name, email, role }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
-        
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+            })
+
     }
     return (
         <div>

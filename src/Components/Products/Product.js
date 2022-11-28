@@ -1,12 +1,27 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { FaMapMarkerAlt, FaUserCheck } from "react-icons/fa";
 
 
-const Product = ({ product, setBooking}) => {
-  
 
+const Product = ({ product, setBooking}) => {
+     
+  
     const { image, title, location, original_price, resale_price, years_of_purchase, 
-        seller_name,  post_time, product_condition, description} = product
+        seller_name,  post_time, product_condition, description, seller_email } = product
+      
+    //     const url = `http://localhost:5000/verify?email=${seller_email}`
+    //     // console.log(url)
+    //     const { data: verify, refetch } = useQuery({
+    //         queryKey: ['verify'],
+    //         queryFn: async () => {
+    //             const res = await fetch(url, {
+    //             });
+    //             const data = await res.json();
+    //             return data;
+    //         }
+    //     })
+    // console.log(verify?.seller_verified)
     return (
         <div>
             <div className="card lg:w-96 lg:h-full bg-base-100 shadow-2xl shadow-white">
@@ -25,11 +40,13 @@ const Product = ({ product, setBooking}) => {
                     <p>Post Date/Time : {post_time}</p>
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
+{/*                         
+                        {
                         
-                        {/* {
+
                           
-                          seller_verified === 'verified' &&<p className='text-green-700'><FaUserCheck></FaUserCheck></p>    
-                          
+                        verify?.seller_verified ==='verified'  && <p className='text-green-700'><FaUserCheck></FaUserCheck></p>    
+                
                         } */}
 
                     </div>

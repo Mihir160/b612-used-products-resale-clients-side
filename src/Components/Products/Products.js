@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from './BookingModal';
@@ -8,7 +9,9 @@ const Products = () => {
 
     const products = useLoaderData()
     const [booking, setBooking] = useState([])
-   
+     
+    
+
 
     return (
         <div>
@@ -17,6 +20,7 @@ const Products = () => {
                 {
                     products.map((product) => <Product key={product._id} product={product} setBooking={setBooking}></Product>)
                 }
+              
             </div>
             <BookingModal booking={booking}></BookingModal>
         </div>

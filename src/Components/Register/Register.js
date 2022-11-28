@@ -1,13 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
+import useToken from '../Hooks/useToken';
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUser } = useContext(AuthContext);
     const [signUpError, setSignUPError] = useState('');
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
+    const navigate = useNavigate();
+    if(token){
+        navigate('/')
+    }
     const handleSignUp = (data) => {
        
         setSignUPError('');
@@ -44,10 +50,14 @@ const Register = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
+            setCreatedUserEmail(email)
+       
         })
         
     }
+
+   
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
