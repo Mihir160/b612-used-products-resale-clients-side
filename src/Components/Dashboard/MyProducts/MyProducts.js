@@ -38,6 +38,7 @@ const MyProducts = () => {
         })
         
     }
+    
 
     const advertiseProduct = myproduct =>{
         console.log(myproduct)
@@ -52,7 +53,7 @@ const MyProducts = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            toast.success('suceesfully asvitise')
+            toast.success('suceesfully advitise')
         })
 
     }

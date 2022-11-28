@@ -10,20 +10,9 @@ const Product = ({ product, setBooking}) => {
      
      const {user} = useContext(AuthContext)
     const { image, title, location, original_price, resale_price, years_of_purchase, 
-        seller_name,  post_time, product_condition, description, seller_email } = product
+        seller_name,  post_time, product_condition, description, seller_email, years_of_use } = product
       
-    //     const url = `http://localhost:5000/verify?email=${seller_email}`
-    //     // console.log(url)
-    //     const { data: verify, refetch } = useQuery({
-    //         queryKey: ['verify'],
-    //         queryFn: async () => {
-    //             const res = await fetch(url, {
-    //             });
-    //             const data = await res.json();
-    //             return data;
-    //         }
-    //     })
-    // console.log(verify?.seller_verified)
+
    
     const wishlistHandle = wishlist =>{
             console.log(wishlist)
@@ -75,6 +64,7 @@ const Product = ({ product, setBooking}) => {
                     <p>Original Price : ${original_price}</p>
                     <p>Resale Price : ${resale_price}</p>
                     <p>years_of_purchase : {years_of_purchase}</p>
+                    <p>years_of_use : {years_of_use}</p>
                     <p>Condition : {product_condition}</p>
                     <p>Post Date/Time : {post_time}</p>
                     <div className='flex items-center'>
