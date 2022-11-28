@@ -16,7 +16,7 @@ const Advertise = () => {
         <div >
             {advertisedItems && (
                 <h2 className="text-3xl my-10 text-center">
-                    Advertised Items:{advertisedItems.length}
+                    Advertised Items
                 </h2>
             )}
          <div className="grid gap-6 grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3  mt-12 mb-12">
