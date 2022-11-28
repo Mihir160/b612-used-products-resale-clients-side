@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: '/products/:category_name',
         element: <PrivateRoute><Products></Products></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.category_name}`)
+        loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/products/${params.category_name}`)
       },
       {
         path: '/login',
@@ -86,12 +86,12 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/payment/:id',
         element: <BuyerRoute><Payment></Payment></BuyerRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+        loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/bookings/${params.id}`)
       },
       {
         path: '/dashboard/paymentwishlist/:id',
         element: <BuyerRoute><WishlistPayment></WishlistPayment></BuyerRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/wishlist/${params.id}`)
+        loader: ({ params }) => fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/wishlist/${params.id}`)
       }
     ]
   }

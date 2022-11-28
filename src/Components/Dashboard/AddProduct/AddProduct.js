@@ -20,7 +20,7 @@ const AddProduct = () => {
     const { data: categoryname, isLoading } = useQuery({
         queryKey: ['categoryname'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categoryname')
+            const res = await fetch('https://b612-used-products-resale-server-side-eight.vercel.app/categoryname')
             const data = await res.json()
             return data
         }
@@ -72,7 +72,7 @@ const AddProduct = () => {
                         description: data.description
                     }
 
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://b612-used-products-resale-server-side-eight.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

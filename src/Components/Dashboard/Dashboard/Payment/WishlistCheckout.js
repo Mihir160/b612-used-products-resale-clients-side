@@ -14,7 +14,7 @@ const WishlistCheckout = ({ wishlist }) => {
     const { resalePrice, userName, email, _id, bookingId } = wishlist
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://b612-used-products-resale-server-side-eight.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const WishlistCheckout = ({ wishlist }) => {
                 bookingId: _id
             }
 
-            fetch('http://localhost:5000/wishlistpayments', {
+            fetch('https://b612-used-products-resale-server-side-eight.vercel.app/wishlistpayments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -100,7 +100,7 @@ const WishlistCheckout = ({ wishlist }) => {
                         setSuccess('Congrats! your payment completed');
                         setTransactionId(paymentIntent.id);
 
-                        fetch(`http://localhost:5000/productsdelete/${bookingId}`,{
+                        fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/productsdelete/${bookingId}`,{
                             method: 'DELETE',
                             headers:{
                                 // 'content-type': 'application/json', 

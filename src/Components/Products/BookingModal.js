@@ -26,7 +26,7 @@ const BookingModal = ({booking}) => {
             bookingId,
             image
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://b612-used-products-resale-server-side-eight.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -30,7 +30,7 @@ const Product = ({ product, setBooking }) => {
         }
 
 
-        fetch('http://localhost:5000/wishlist', {
+        fetch('https://b612-used-products-resale-server-side-eight.vercel.app/wishlist', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

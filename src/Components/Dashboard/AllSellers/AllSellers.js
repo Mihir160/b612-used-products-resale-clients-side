@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 const AllSellers = () => {
 
     const roleType = 'Seller'
-    const url = `http://localhost:5000/users?role=${roleType}`;
+    const url = `https://b612-used-products-resale-server-side-eight.vercel.app/users?role=${roleType}`;
 
     const { data: seller = [], refetch } = useQuery({
         queryKey: ['role', roleType],
@@ -22,7 +22,7 @@ const AllSellers = () => {
     })
   
     const sellerDelete = seller =>{
-        fetch(`http://localhost:5000/users/${seller._id}`,{
+        fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/users/${seller._id}`,{
             method: 'DELETE',
             headers:{
                 // 'content-type': 'application/json', 
@@ -42,7 +42,7 @@ const AllSellers = () => {
 
     const handleVerified = email =>{
        
-        fetch(`http://localhost:5000/users/seller/${email}`,{
+        fetch(`https://b612-used-products-resale-server-side-eight.vercel.app/users/seller/${email}`,{
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
