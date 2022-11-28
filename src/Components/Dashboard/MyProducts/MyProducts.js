@@ -73,7 +73,6 @@ const MyProducts = () => {
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>status</th>
                                 <th>Advertise</th>
                                 <th>Delete</th>
                             </tr>
@@ -85,7 +84,6 @@ const MyProducts = () => {
                                     <td><img className='w-24 ' src={myproduct.image} alt="" srcset="" /></td>
                                     <td>{myproduct.title}</td>
                                     <td>{myproduct.resale_price}</td>
-                                    <td><button className='btn btn-xs bg-green-600'>Available</button></td>
                                     <td><button onClick={() => advertiseProduct(myproduct)} className='btn btn-xs bg-green-600'>Advertise</button></td>
                                     <td><button  onClick={() => deleteMyProduct(myproduct._id)} className='btn btn-xs bg-red-600'>Delete</button></td>
                                 </tr>)

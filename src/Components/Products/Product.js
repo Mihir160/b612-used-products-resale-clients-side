@@ -7,10 +7,11 @@ import { AuthContext } from '../contexts/AuthProvider';
 
 
 const Product = ({ product, setBooking}) => {
+    console.log(product)
      
      const {user} = useContext(AuthContext)
     const { image, title, location, original_price, resale_price, years_of_purchase, 
-        seller_name,  post_time, product_condition, description, seller_email, years_of_use } = product
+        seller_name,  post_time, product_condition, description, seller_email, seller_state, years_of_use } = product
       
 
    
@@ -28,7 +29,7 @@ const Product = ({ product, setBooking}) => {
                 bookingId : wishlist._id,
                 image : wishlist.image
             }
-            // console.log(wishlistadd)
+            
 
             fetch('http://localhost:5000/wishlist', {
             method: 'POST',
@@ -69,14 +70,10 @@ const Product = ({ product, setBooking}) => {
                     <p>Post Date/Time : {post_time}</p>
                     <div className='flex items-center'>
                         <p>Seller : {seller_name}</p>
-{/*                         
-                        {
                         
-
-                          
-                        verify?.seller_verified ==='verified'  && <p className='text-green-700'><FaUserCheck></FaUserCheck></p>    
-                
-                        } */}
+                        {
+                        seller_state && <p className='text-green-600'><FaUserCheck></FaUserCheck></p>  
+                        }
 
                     </div>
                     <div className="card-actions justify-end">
